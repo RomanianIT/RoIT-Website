@@ -10,37 +10,26 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WebsiteBundle\Entity\Zone;
 use WebsiteBundle\Form\ZoneType;
 
-/**
- * Zone controller.
- *
- * @Route("/zone")
- */
+
 class ZoneController extends Controller
 {
     /**
-     * Lists all Zone entities.
-     *
-     * @Route("/", name="zone_index")
-     * @Method("GET")
-     * @Template()
+     * Zones main action
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
         $zones = $em->getRepository('WebsiteBundle:Zone')->findAll();
-
-        return array(
-            'zones' => $zones,
-        );
+        return $this->render('AdminBundle:Sections/Zone:index.html.twig',[
+            'zones' => $zones
+        ]);
     }
 
     /**
-     * Creates a new Zone entity.
-     *
-     * @Route("/new", name="zone_new")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -53,38 +42,34 @@ class ZoneController extends Controller
             $em->persist($zone);
             $em->flush();
 
-            return $this->redirectToRoute('zone_show', array('id' => $zone->getId()));
+            return $this->redirectToRoute('website_admin_zones_show', array('id' => $zone->getId()));
         }
 
-        return array(
+        return $this->render('AdminBundle:Sections/Zone:new.html.twig',[
             'zone' => $zone,
-            'form' => $form->createView(),
-        );
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * Finds and displays a Zone entity.
-     *
-     * @Route("/{id}", name="zone_show")
-     * @Method("GET")
-     * @Template()
+     * @param Zone $zone
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Zone $zone)
     {
         $deleteForm = $this->createDeleteForm($zone);
 
-        return array(
+        return $this->render('AdminBundle:Sections/Zone:show.html.twig',[
             'zone' => $zone,
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
 
+
     /**
-     * Displays a form to edit an existing Zone entity.
-     *
-     * @Route("/{id}/edit", name="zone_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @param Zone $zone
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Zone $zone)
     {
@@ -97,21 +82,20 @@ class ZoneController extends Controller
             $em->persist($zone);
             $em->flush();
 
-            return $this->redirectToRoute('zone_edit', array('id' => $zone->getId()));
+            return $this->redirectToRoute('website_admin_zones_edit', array('id' => $zone->getId()));
         }
 
-        return array(
+        return $this->render('AdminBundle:Sections/Zone:edit.html.twig',[
             'zone' => $zone,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
 
     /**
-     * Deletes a Zone entity.
-     *
-     * @Route("/{id}", name="zone_delete")
-     * @Method("DELETE")
+     * @param Request $request
+     * @param Zone $zone
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Zone $zone)
     {
@@ -124,20 +108,18 @@ class ZoneController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('zone_index');
+        return $this->redirectToRoute('website_admin_zones_main');
     }
 
     /**
      * Creates a form to delete a Zone entity.
-     *
      * @param Zone $zone The Zone entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Zone $zone)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('zone_delete', array('id' => $zone->getId())))
+            ->setAction($this->generateUrl('website_admin_zones_delete', array('id' => $zone->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

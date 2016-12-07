@@ -10,55 +10,40 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WebsiteBundle\Entity\Project;
 use WebsiteBundle\Form\ProjectType;
 
-/**
- * Project controller.
- *
- * @Route("/proiecte")
- */
+
 class ProjectController extends Controller
 {
 
     /**
-     * Lists all Project entities.
-     *
-     * @Route("/", name="proiecte_index")
-     * @Method("GET")
-     * @Template()
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $projects = $em->getRepository('WebsiteBundle:Project')->findAll();
 
-        return array(
+        return $this->render('AdminBundle:Sections/Project:index.html.twig', array(
             'projects' => $projects,
-        );
+        ));
     }
 
     /**
      * Finds and displays a Project entity.
-     *
-     * @Route("/{id}", name="proiecte_show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction(Project $project)
     {
         $deleteForm = $this->createDeleteForm($project);
 
-        return array(
+        return $this->render('AdminBundle:Sections/Project:index.html.twig',[
             'project' => $project,
-            'delete_form' => $deleteForm->createView(),
-        );
+            'delete_form' => $deleteForm->createView()
+        ]);
     }
 
     /**
-     * Displays a form to edit an existing Project entity.
-     *
-     * @Route("/{id}/modifica", name="proiecte_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @param Project $project
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Project $project)
     {
@@ -71,27 +56,19 @@ class ProjectController extends Controller
             $em->persist($project);
             $em->flush();
 
-            return $this->redirectToRoute('proiecte_edit', array('id' => $project->getId()));
+            return $this->redirectToRoute('website_admin_projects_edit', array('id' => $project->getId()));
         }
 
-        return array(
+
+        return $this->render('AdminBundle:Sections/Project:index.html.twig', array(
             'project' => $project,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
-
-//        return $this->render('project/edit.html.twig', array(
-//            'project' => $project,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        ));
+        ));
     }
 
     /**
      * Deletes a Project entity.
-     *
-     * @Route("/{id}", name="proiecte_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Project $project)
     {
@@ -104,20 +81,18 @@ class ProjectController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('proiecte_index');
+        return $this->redirectToRoute('website_admin_projects_main');
     }
 
     /**
      * Creates a form to delete a Project entity.
-     *
      * @param Project $project The Project entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Project $project)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('proiecte_delete', array('id' => $project->getId())))
+            ->setAction($this->generateUrl('website_admin_projects_delete', array('id' => $project->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

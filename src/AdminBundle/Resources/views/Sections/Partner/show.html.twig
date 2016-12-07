@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Member</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ partner.id }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>
+                    {% if partner.avatar is null or partner.avatar == '' %}
+                        <img src="{{ asset('bundles/website/images/default-user.jpg') }}" class="img-responsive img-circle" alt=""/>
+                    {% else %}
+                        <img alt="" id="avatar" class="editable img-responsive img-circle" src="{{ asset(partner.avatar.webPath) }}" />
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ partner.name }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ partner.country }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ partner.city }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ partner.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ partner.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Website</th>
+                <td>{{ partner.website }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ partner.facebook }}</td>
+            </tr>
+            <tr>
+                <th>LinkedIn</th>
+                <td>{{ partner.linkedIn }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ partner.type }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ partner.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('website_admin_partners_main') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('website_admin_partners_edit', { 'id': partner.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

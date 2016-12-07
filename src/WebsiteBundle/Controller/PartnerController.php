@@ -10,18 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WebsiteBundle\Entity\Partner;
 use WebsiteBundle\Form\PartnerType;
 
-/**
- * Partner controller.
- *
- * @Route("/parteneri")
- */
+
 class PartnerController extends Controller
 {
+
     /**
-     * Create partner
-     *
-     * @Route("/create", name="parteneri_create")
-     * @Template()
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function createAction(Request $request)
     {
@@ -34,24 +29,17 @@ class PartnerController extends Controller
             $em->persist($partner);
             $em->flush();
 
-            return $this->redirectToRoute('parteneri_index', array());
+            return $this->redirectToRoute('website_admin_partners_main', array());
         }
 
-        return array(
-            'partner' => $partner, 'form' => $form->createView()
-        );
-
-//        return $this->render('WebsiteBundle:Default:registerPartner.html.twig',
-//            ['partner' => $partner, 'form' => $form->createView()]
-//        );
+        return $this->render('AdminBundle:Sections/Partner:create.html.twig', [
+            'partner' => $partner,
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * Lists all Partner entities.
-     *
-     * @Route("/", name="parteneri_index")
-     * @Method("GET")
-     * @Template()
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -59,35 +47,30 @@ class PartnerController extends Controller
 
         $partners = $em->getRepository('WebsiteBundle:Partner')->findAll();
 
-        return array(
-            'partners' => $partners,
-        );
+        return $this->render('AdminBundle:Sections/Partner:index.html.twig',[
+            'partners' => $partners
+        ]);
     }
 
 
     /**
-     * Finds and displays a Partner entity.
-     *
-     * @Route("/{id}", name="parteneri_show")
-     * @Method("GET")
-     * @Template()
+     * @param Partner $partner
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Partner $partner)
     {
         $deleteForm = $this->createDeleteForm($partner);
 
-        return array(
+        return $this->render('AdminBundle:Sections/Partner:show.html.twig',[
             'partner' => $partner,
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
 
     /**
-     * Displays a form to edit an existing Partner entity.
-     *
-     * @Route("/{id}/modifica", name="parteneri_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @param Partner $partner
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function editAction(Request $request, Partner $partner)
     {
@@ -105,21 +88,18 @@ class PartnerController extends Controller
                 'Modificările au fost salvate!'
             );
 
-            return $this->redirectToRoute('parteneri_edit', array('id' => $partner->getId()));
+            return $this->redirectToRoute('website_admin_partners_edit', array('id' => $partner->getId()));
         }
 
-        return array(
+        return $this->render('AdminBundle:Sections/Partner:edit.html.twig',[
             'partner' => $partner,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
 
     /**
      * Deletes a Partner entity.
-     *
-     * @Route("/{id}", name="parteneri_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Partner $partner)
     {
@@ -132,20 +112,18 @@ class PartnerController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('parteneri_index');
+        return $this->redirectToRoute('website_admin_partners_main');
     }
 
     /**
      * Creates a form to delete a Partner entity.
-     *
      * @param Partner $partner The Partner entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Partner $partner)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('parteneri_delete', array('id' => $partner->getId())))
+            ->setAction($this->generateUrl('website_admin_partners_delete', array('id' => $partner->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

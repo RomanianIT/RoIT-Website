@@ -1,0 +1,19 @@
+website_admin_projects_main:
+    path:     /
+    defaults: { _controller: WebsiteBundle:Project:index }
+
+website_admin_projects_show:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Project:show}
+    methods:  GET
+
+website_admin_projects_edit:
+    path:     /{id}/modifica
+    defaults: { _controller: WebsiteBundle:Project:edit }
+    methods:  [GET,POST]
+
+website_admin_projects_delete:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Project:delete }
+    methods:  DELETE
+

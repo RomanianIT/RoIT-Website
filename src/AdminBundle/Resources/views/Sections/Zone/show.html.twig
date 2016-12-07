@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Zone</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ zone.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ zone.name }}</td>
+            </tr>
+            <tr>
+                <th>Flag</th>
+                <td>{{ zone.flag }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ zone.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('website_admin_zones_main') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('website_admin_zones_edit', { 'id': zone.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

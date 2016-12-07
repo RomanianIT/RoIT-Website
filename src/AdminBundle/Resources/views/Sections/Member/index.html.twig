@@ -1,0 +1,52 @@
+{#{% extends 'base.html.twig' %}#}
+
+{% block body %}
+    <h1>Member list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Position</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Reason</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for member in members %}
+            <tr>
+                <td><a href="{{ path('website_admin_members_show', { 'id': member.id }) }}">{{ member.id }}</a></td>
+                <td>{{ member.firstname }}</td>
+                <td>{{ member.lastname }}</td>
+                <td>{{ member.country }}</td>
+                <td>{{ member.city }}</td>
+                <td>{{ member.position }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.telephone }}</td>
+                <td>{{ member.reason }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('website_admin_members_show', { 'id': member.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('website_admin_members_edit', { 'id': member.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <a href="{{ path('website_register_member') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

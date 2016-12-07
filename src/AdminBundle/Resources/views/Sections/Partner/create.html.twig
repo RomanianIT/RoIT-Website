@@ -1,0 +1,89 @@
+{% extends "WebsiteBundle::Structure/layout.html.twig" %}
+
+{% block title %}RoIT: Membru Nou{% endblock %}
+
+{#{% block custom_styles %}#}
+    {#{% stylesheets 'bundles/website/css/city-autocomplete.css'#}
+    {#output='style' filter='cssrewrite' -%}#}
+
+    {#<link rel="stylesheet" type="text/css" media="screen, print" href="{{ asset_url }}" />#}
+    {#{% endstylesheets -%}#}
+{#{% endblock %}#}
+
+{% block custom_script %}
+    {% include 'WebsiteBundle::Partials/_linkedIn_connect.html.twig' %}
+{% endblock %}
+
+{% block menu_class %} navbar-shrink {% endblock %}
+
+
+{% block nav_bar_menu %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- Contact Section -->
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">{{ 'content.partner.title' | trans() }}</h2>
+                    <h3 class="section-subheading text-muted">
+                        {{ 'content.partner.subtitle' | trans() | raw }}
+
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+                    {% form_theme form "WebsiteBundle:Structure:form_row.html.twig" %}
+                    {% import "WebsiteBundle:Structure:macros.html.twig" as formMacros %}
+
+                    {{ formMacros.displayFormErrors(form) }}
+
+                    {{ form_start(form, {action: path('website_admin_partners_new'), multipart: true, attr: {name: 'register', id: 'contactForm', class: '', novalidate:'' } }) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                        {{ form_row(form.avatar.file, { id: 'inputImage', attr: { accept: 'image/*' }, croppable: true }) }}
+                        {{ form_row(form.name, {attr : {'data-validation-required-message' : 'Te rugăm  să introduci denumirea.' } }) }}
+                        {{ form_row(form.country, { class: 'form-control' }) }}
+                        {{ form_row(form.city, {attr : {'data-validation-required-message' : 'Te rugăm  să îți introduci orașul.', 'data-country' : 'RO' } }) }}
+                        {{ form_row(form.email, {attr : {'data-validation-required-message' : 'Te rugăm  să îți introduci emailul.' } }) }}
+                        {{ form_row(form.telephone) }}
+                        </div>
+
+                        <div class="col-md-6">
+                        {{ form_row(form.website) }}
+                        {{ form_row(form.facebook) }}
+                        {{ form_row(form.linkedIn) }}
+                        {{ form_row(form.type) }}
+                        {{ form_row(form.center, {'label': 'Centru',class: 'form-control' }) }}
+                        {{ form_row(form.description, {class: 'form-control', attr : {'rows': 5 } }) }}
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                        {{ formMacros.submitFormButton() }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block footer_scripts %}
+    <script>
+        $( "#partner_country" ).change(function() {
+            var countryCode = $( "#partner_country option:selected").val();
+            $('input#partner_city').data('country', countryCode);
+        });
+
+        $('input#partner_city').cityAutocomplete();
+    </script>
+{% endblock %}

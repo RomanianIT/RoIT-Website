@@ -1,0 +1,19 @@
+website_admin_members_main:
+    path:     /
+    defaults: { _controller: WebsiteBundle:Member:index }
+
+website_admin_members_show:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Member:show }
+    methods:  GET
+
+website_admin_members_edit:
+    path:     /{id}/modifica
+    defaults: { _controller: WebsiteBundle:Member:edit }
+    methods:  [GET,POST]
+
+website_admin_members_delete:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Member:delete }
+    methods:  DELETE
+

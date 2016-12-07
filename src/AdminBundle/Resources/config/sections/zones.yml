@@ -1,0 +1,23 @@
+website_admin_zones_main:
+    path:     /
+    defaults: { _controller: WebsiteBundle:Zone:index}
+
+website_admin_zones_new:
+    path:     /new
+    defaults: { _controller: WebsiteBundle:Zone:new }
+    methods:  [GET,POST]
+
+website_admin_zones_show:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Zone:show }
+    methods:  GET
+
+website_admin_zones_edit:
+    path:     /{id}/modifica
+    defaults: { _controller: WebsiteBundle:Zone:edit }
+    methods:  [GET,POST]
+
+website_admin_zones_delete:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Zone:delete }
+    methods:  DELETE

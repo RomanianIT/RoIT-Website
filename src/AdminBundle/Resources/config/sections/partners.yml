@@ -1,0 +1,24 @@
+website_admin_partners_main:
+    path:     /
+    defaults: { _controller: WebsiteBundle:Partner:index}
+
+
+website_admin_partners_new:
+    path:     /new
+    defaults: { _controller: WebsiteBundle:Partner:create }
+    methods:  [GET,POST]
+
+website_admin_partners_show:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Partner:show }
+    methods:  GET
+
+website_admin_partners_edit:
+    path:     /{id}/modifica
+    defaults: { _controller: WebsiteBundle:Partner:edit }
+    methods:  [GET,POST]
+
+website_admin_partners_delete:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Partner:delete }
+    methods:  DELETE

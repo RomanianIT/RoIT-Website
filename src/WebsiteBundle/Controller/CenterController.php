@@ -4,43 +4,29 @@ namespace WebsiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WebsiteBundle\Entity\Center;
 use WebsiteBundle\Form\CenterType;
 
-/**
- * Center controller.
- *
- * @Route("/centre")
- */
 class CenterController extends Controller
 {
     /**
-     * Lists all Center entities.
-     *
-     * @Route("/", name="centre_index")
-     * @Method("GET")
-     * @Template()
+     * Centers main action
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
         $centers = $em->getRepository('WebsiteBundle:Center')->findAll();
-
-        return array(
-            'centers' => $centers,
-        );
+        return $this->render('AdminBundle:Sections/Center:index.html.twig',[
+            'centers' => $centers
+        ]);
     }
 
     /**
-     * Creates a new Center entity.
-     *
-     * @Route("/new", name="centre_new")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * Create new Center entity
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -53,38 +39,33 @@ class CenterController extends Controller
             $em->persist($center);
             $em->flush();
 
-            return $this->redirectToRoute('centre_show', array('id' => $center->getId()));
+            return $this->redirectToRoute('website_admin_centers_show', array('id' => $center->getId()));
         }
 
-        return array(
+        return $this->render('AdminBundle:Sections/Center:new.html.twig',[
             'center' => $center,
-            'form' => $form->createView(),
-        );
+            'form' => $form->createView()
+        ]);
     }
 
+
     /**
-     * Finds and displays a Center entity.
-     *
-     * @Route("/{id}", name="centre_show")
-     * @Method("GET")
-     * @Template()
+     * @param Center $center
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Center $center)
     {
         $deleteForm = $this->createDeleteForm($center);
-
-        return array(
+        return $this->render('AdminBundle:Sections/Center:show.html.twig',[
             'center' => $center,
-            'delete_form' => $deleteForm->createView(),
-        );
+            'delete_form' => $deleteForm->createView()
+        ]);
     }
 
     /**
-     * Displays a form to edit an existing Center entity.
-     *
-     * @Route("/{id}/edit", name="centre_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @param Center $center
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Center $center)
     {
@@ -97,22 +78,20 @@ class CenterController extends Controller
             $em->persist($center);
             $em->flush();
 
-            return $this->redirectToRoute('centre_edit', array('id' => $center->getId()));
+            return $this->redirectToRoute('website_admin_centers_show', array('id' => $center->getId()));
         }
 
-        return array(
-            'center' => $center,
+        return $this->render('AdminBundle:Sections/Center:edit.html.twig',[
+           'center' => $center,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+            'delete_form' => $deleteForm->createView()
+        ]);
     }
 
     /**
-     * Deletes a Center entity.
-     *
-     * @Route("/{id}", name="centre_delete")
-     * @Method("DELETE")
-     * @Template()
+     * @param Request $request
+     * @param Center $center
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Center $center)
     {
@@ -125,20 +104,18 @@ class CenterController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('centre_index');
+        return $this->redirectToRoute('website_admin_centers_main');
     }
 
     /**
      * Creates a form to delete a Center entity.
-     *
      * @param Center $center The Center entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Center $center)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('centre_delete', array('id' => $center->getId())))
+            ->setAction($this->generateUrl('website_admin_centers_delete', array('id' => $center->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

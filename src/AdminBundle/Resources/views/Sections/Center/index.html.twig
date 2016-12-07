@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Center list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Zone</th>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for center in centers %}
+            <tr>
+                <td><a href="{{ path('website_admin_centers_show', { 'id': center.id }) }}">{{ center.id }}</a></td>
+                <td>{{ center.name }}</td>
+                <td>{{ center.zone }}</td>
+                <td>{{ center.content }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('website_admin_centers_show', { 'id': center.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('website_admin_centers_edit', { 'id': center.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('website_admin_centers_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

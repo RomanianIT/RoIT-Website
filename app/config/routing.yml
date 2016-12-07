@@ -1,3 +1,7 @@
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 website_avatar:
     resource: "@WebsiteBundle/Controller/AvatarController.php"
     type:     annotation
