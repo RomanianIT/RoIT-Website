@@ -10,37 +10,27 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WebsiteBundle\Entity\Event;
 use WebsiteBundle\Form\EventType;
 
-/**
- * Event controller.
- *
- * @Route("/evenimente")
- */
+
 class EventController extends Controller
 {
+
     /**
-     * Lists all Event entities.
-     *
-     * @Route("/", name="evenimente_index")
-     * @Method("GET")
-     * @Template()
+     * Events main action
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
         $events = $em->getRepository('WebsiteBundle:Event')->findAll();
-
-        return array(
-            'events' => $events,
-        );
+       return $this->render('AdminBundle:Sections/Event:index.html.twig',[
+           'events' => $events
+       ]);
     }
 
     /**
-     * Creates a new Event entity.
-     *
-     * @Route("/new", name="evenimente_new")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -53,38 +43,33 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('evenimente_show', array('id' => $event->getId()));
+            return $this->redirectToRoute('website_admin_events_show', array('id' => $event->getId()));
         }
-
-        return array(
+        return $this->render('AdminBundle:Sections/Event:new.html.twig', [
             'event' => $event,
-            'form' => $form->createView(),
-        );
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * Finds and displays a Event entity.
-     *
-     * @Route("/{id}", name="evenimente_show")
-     * @Method("GET")
-     * @Template()
+     * @param Event $event
+     * @return string
      */
     public function showAction(Event $event)
     {
         $deleteForm = $this->createDeleteForm($event);
 
-        return array(
+        return $this->render('AdminBundle:Sections/Event:show.html.twig',[
             'event' => $event,
-            'delete_form' => $deleteForm->createView(),
-        );
+            'delete_form' => $deleteForm->createView()
+        ]);
     }
 
+
     /**
-     * Displays a form to edit an existing Event entity.
-     *
-     * @Route("/{id}/edit", name="evenimente_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @param Request $request
+     * @param Event $event
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Event $event)
     {
@@ -97,21 +82,20 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('evenimente_edit', array('id' => $event->getId()));
+            return $this->redirectToRoute('website_admin_events_edit', array('id' => $event->getId()));
         }
 
-        return array(
+        return $this->render('AdminBundle:Sections/Event:edit.html.twig',[
             'event' => $event,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+            'delete_form' => $deleteForm->createView()
+        ]);
     }
 
     /**
-     * Deletes a Event entity.
-     *
-     * @Route("/{id}", name="evenimente_delete")
-     * @Method("DELETE")
+     * @param Request $request
+     * @param Event $event
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Event $event)
     {
@@ -124,20 +108,18 @@ class EventController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('evenimente_index');
+        return $this->redirectToRoute('website_admin_events_main');
     }
 
     /**
      * Creates a form to delete a Event entity.
-     *
      * @param Event $event The Event entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Event $event)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('evenimente_delete', array('id' => $event->getId())))
+            ->setAction($this->generateUrl('website_admin_events_delete', array('id' => $event->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

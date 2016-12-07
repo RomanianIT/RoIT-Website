@@ -1,0 +1,23 @@
+website_admin_centers_main:
+    path:     /
+    defaults: { _controller: WebsiteBundle:Center:index }
+
+website_admin_centers_new:
+    path:     /new
+    defaults: { _controller: WebsiteBundle:Center:new}
+    methods:  [GET,POST]
+
+website_admin_centers_show:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Center:show }
+    methods:  GET
+
+website_admin_centers_edit:
+    path:     /{id}/modifica
+    defaults: { _controller: WebsiteBundle:Center:edit }
+    methods:  [GET,POST]
+
+website_admin_centers_delete:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Center:delete }
+    methods:  DELETE

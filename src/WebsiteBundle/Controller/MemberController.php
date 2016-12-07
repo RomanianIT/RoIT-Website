@@ -10,63 +10,43 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WebsiteBundle\Entity\Member;
 use WebsiteBundle\Form\MemberType;
 
-/**
- * Member controller.
- *
- * @Route("/membri")
- */
+
 class MemberController extends Controller
 {
+
     /**
-     * Lists all Member entities.
-     *
-     * @Route("/", name="membri_index")
-     * @Method("GET")
-     * @Template()
+     * Admin members - main action
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $members = $em->getRepository('WebsiteBundle:Member')->findAll();
 
-        return array(
+        return $this->render('AdminBundle:Sections/Member:index.html.twig', array(
             'members' => $members,
-        );
-//        return $this->render('member/index.html.twig', array(
-//            'members' => $members,
-//        ));
+        ));
     }
 
-
     /**
-     * Finds and displays a Member entity.
-     *
-     * @Route("/{id}", name="membri_show")
-     * @Method("GET")
-     * @Template()
+     * Admin members - show member details page
+     * @param Member $member
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Member $member)
     {
         $deleteForm = $this->createDeleteForm($member);
-
-        return array(
+        return $this->render('AdminBundle:Sections/Member:show.html.twig', array(
             'member' => $member,
             'delete_form' => $deleteForm->createView(),
-        );
-
-//        return $this->render('member/show.html.twig', array(
-//            'member' => $member,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
+        ));
     }
 
     /**
-     * Displays a form to edit an existing Member entity.
-     *
-     * @Route("/{id}/modifica", name="membri_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * Admin members - edit action
+     * @param Request $request
+     * @param Member $member
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function editAction(Request $request, Member $member)
     {
@@ -84,27 +64,17 @@ class MemberController extends Controller
                 'Modificările au fost salvate!'
             );
 
-            return $this->redirectToRoute('membri_edit', array('id' => $member->getId()));
+            return $this->redirectToRoute('website_admin_members_edit', array('id' => $member->getId()));
         }
 
-        return array(
+
+        return $this->render('AdminBundle:Sections/Member:edit.html.twig', array(
             'member' => $member,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
-//        return $this->render('member/edit.html.twig', array(
-//            'member' => $member,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        ));
+        ));
     }
 
-    /**
-     * Deletes a Member entity.
-     *
-     * @Route("/{id}", name="membri_delete")
-     * @Method("DELETE")
-     */
     public function deleteAction(Request $request, Member $member)
     {
         $form = $this->createDeleteForm($member);
@@ -116,20 +86,18 @@ class MemberController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('membri_index');
+        return $this->redirectToRoute('website_admin_members_main');
     }
 
     /**
      * Creates a form to delete a Member entity.
-     *
      * @param Member $member The Member entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Member $member)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('membri_delete', array('id' => $member->getId())))
+            ->setAction($this->generateUrl('website_admin_members_delete', array('id' => $member->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

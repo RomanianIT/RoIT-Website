@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Member</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ member.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ member.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ member.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ member.country }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ member.city }}</td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ member.position }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ member.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ member.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Reason</th>
+                <td>{{ member.reason }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('website_admin_members_main') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('website_admin_members_edit', { 'id': member.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

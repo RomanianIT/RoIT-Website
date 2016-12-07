@@ -1,0 +1,12 @@
+{% extends "AdminBundle::layout.html.twig" %}
+{% block title %} Dashboard {% endblock %}
+{% block styles %}{% endblock %}
+{% block scripts %}{% endblock %}
+{% block body %}
+<a href="{{ path('website_admin_projects_main') }}">Proiecte</a>
+<a href="{{ path('website_admin_members_main') }}">Membrii</a>
+<a href="{{ path('website_admin_centers_main') }}">Centre</a>
+<a href="{{ path('website_admin_events_main') }}">Evenimente</a>
+<a href="{{ path('website_admin_zones_main') }}">Zone</a>
+<a href="{{ path('website_admin_partners_main') }}">Parteneri</a>
+{% endblock %}

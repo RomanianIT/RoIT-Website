@@ -33,11 +33,12 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
     access_control:
         # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/membri, roles: ROLE_ADMIN }
-         - { path: ^/proiecte, roles: ROLE_ADMIN }
-         - { path: ^/centre, roles: ROLE_ADMIN }
-         - { path: ^/evenimente, roles: ROLE_ADMIN }
-         - { path: ^/avatar, roles: ROLE_ADMIN }
-         - { path: ^/zone, roles: ROLE_ADMIN }
-         - { path: ^/parteneri, roles: ROLE_ADMIN }
-         - { path: ^/events, roles: ROLE_ADMIN }
+#         - { path: ^/membri, roles: ROLE_ADMIN }
+#         - { path: ^/proiecte, roles: ROLE_ADMIN }
+#         - { path: ^/centre, roles: ROLE_ADMIN }
+#         - { path: ^/evenimente, roles: ROLE_ADMIN }
+#         - { path: ^/avatar, roles: ROLE_ADMIN }
+#         - { path: ^/zone, roles: ROLE_ADMIN }
+#         - { path: ^/parteneri, roles: ROLE_ADMIN }
+#         - { path: ^/events, roles: ROLE_ADMIN }
+         - { path: ^/admin, roles: ROLE_ADMIN }

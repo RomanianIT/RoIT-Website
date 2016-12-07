@@ -1,0 +1,24 @@
+website_admin_events_main:
+    path:     /
+    defaults: { _controller: WebsiteBundle:Event:index}
+
+
+website_admin_events_new:
+    path:     /new
+    defaults: { _controller: WebsiteBundle:Event:new }
+    methods:  [GET,POST]
+
+website_admin_events_show:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Event:show }
+    methods:  GET
+
+website_admin_events_edit:
+    path:     /{id}/modifica
+    defaults: { _controller: WebsiteBundle:Event:edit }
+    methods:  [GET,POST]
+
+website_admin_events_delete:
+    path:     /{id}
+    defaults: { _controller: WebsiteBundle:Event:delete }
+    methods:  DELETE

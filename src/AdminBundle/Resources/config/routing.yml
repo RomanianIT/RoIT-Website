@@ -1,0 +1,27 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+
+website_admin_partners:
+    resource: "@AdminBundle/Resources/config/sections/partners.yml"
+    prefix:   /parteneri
+
+website_admin_events:
+    resource: "@AdminBundle/Resources/config/sections/events.yml"
+    prefix:   /evenimente
+
+website_admin_zones:
+    resource: "@AdminBundle/Resources/config/sections/zones.yml"
+    prefix:   /zone
+
+website_admin_members:
+    resource: "@AdminBundle/Resources/config/sections/members.yml"
+    prefix:   /membri
+
+website_admin_projects:
+    resource: "@AdminBundle/Resources/config/sections/projects.yml"
+    prefix:   /proiecte
+
+website_admin_centers:
+    resource: "@AdminBundle/Resources/config/sections/centers.yml"
+    prefix:   /centre

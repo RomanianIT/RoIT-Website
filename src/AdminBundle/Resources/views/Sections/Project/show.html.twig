@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>project</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ project.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ project.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ project.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ project.position }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ project.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ project.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ project.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('website_admin_projects_main') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('website_admin_projects_edit', { 'id': project.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
