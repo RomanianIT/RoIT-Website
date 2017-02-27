@@ -40,3 +40,7 @@ parameters:
     #Google Recaptcha
     google_recaptca_site_key: ~
     google_recaptca_secret_key: ~
+
+    # Slack tokens
+    slack_token: ~
+    slack_channel: ~

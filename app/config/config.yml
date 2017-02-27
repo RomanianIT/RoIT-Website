@@ -88,11 +88,11 @@ jms_translation:
             excluded_dirs: [cache, data, logs]
             #extractors: [jms_i18n_routing]
 
-services:
-    twig.text_extension:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - name: twig.extension
+#services:
+#    twig.text_extension:
+#        class: Twig_Extensions_Extension_Text
+#        tags:
+#            - name: twig.extension
 
 jms_di_extra:
     locations:
@@ -110,3 +110,15 @@ jms_i18n_routing:
 #        en: %roit.host.url.en%
 #        fr: %roit.host.url.fr%
 #    redirect_to_host: true
+
+guzzle:
+    logging: "%kernel.debug%"
+
+    clients:
+        slack_api:
+            base_url: "https://slack.com/"
+
+            options:
+                timeout: 30
+                headers:
+                    Accept: "application/json"

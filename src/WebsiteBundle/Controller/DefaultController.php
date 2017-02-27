@@ -239,6 +239,7 @@ class DefaultController extends Controller
                     );
 
                 $sent = $this->get('mailer')->send($message);
+                $this->get('slack')->inviteUser($member);
 
                 return $this->redirectToRoute('website_share', array());
             }
