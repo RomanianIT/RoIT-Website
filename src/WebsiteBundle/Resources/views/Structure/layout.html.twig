@@ -2,9 +2,6 @@
 
 {% block body %}
 
-    {% include 'WebsiteBundle::Partials/_fb_connect.html.twig' %}
-
-
     {% for type, flashMessage in app.session.flashbag.all() %}
         <div class="alert alert-{{ type }} fade in">
             <button class="close" data-dismiss="alert" type="button">×</button>

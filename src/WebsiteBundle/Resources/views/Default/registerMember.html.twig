@@ -10,7 +10,7 @@
     {% stylesheets
     'bundles/website/css/city-autocomplete.css'
     'bundles/website/css/components/radio-checkbox.css'
-    output='page-style' filter='cssrewrite' -%}
+    output='page-style' filter='uglifycss' filter='cssrewrite' -%}
 
     <link rel="stylesheet" type="text/css" media="screen, print" href="{{ asset_url }}" />
     {% endstylesheets -%}
@@ -21,11 +21,6 @@
         }
     </style>
 {% endblock %}
-
-{% block custom_script %}
-    {% include 'WebsiteBundle::Partials/_linkedIn_connect.html.twig' %}
-{% endblock %}
-
 
 {% block menu_class %} navbar-shrink {% endblock %}
 
@@ -315,7 +310,28 @@
 
 {% block footer_scripts %}
     {{ parent() }}
+    {% include 'WebsiteBundle::Partials/_fb_connect.html.twig' %}
+    {% include 'WebsiteBundle::Partials/_linkedIn_connect.html.twig' %}
+
     <script type="text/javascript">
+        function loadScript(src,callback){
+
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            if(callback)script.onload=callback;
+            document.getElementsByTagName("head")[0].appendChild(script);
+            script.src = src;
+        }
+
+        loadScript('http://maps.googleapis.com/maps/api/js?v=3&?language=ro&key=AIzaSyBZ3hzjzTCqiFED51f_lRENCd2LJ02Uo9I&libraries=places',
+        function(){
+            $( "#member_country" ).change(function() {
+                var countryCode = $( "#member_country option:selected").val();
+                $('input#member_city').data('country', countryCode);
+            });
+
+            $('input#member_city').cityAutocomplete();}
+        );
 
         $(function() {
             var posVal = [];
@@ -386,11 +402,5 @@
             });
         });
 
-        $( "#member_country" ).change(function() {
-            var countryCode = $( "#member_country option:selected").val();
-            $('input#member_city').data('country', countryCode);
-        });
-
-        $('input#member_city').cityAutocomplete();
     </script>
 {% endblock %}
