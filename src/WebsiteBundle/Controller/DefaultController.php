@@ -389,4 +389,9 @@ class DefaultController extends Controller
 
         return $response;
     }
+
+    public function mentorshipAction()
+    {
+        return $this->render('WebsiteBundle:Default:mentorship.html.twig');
+    }
 }

@@ -9353,6 +9353,13 @@ span.middot {
   color: #01A9E1 !important;
 }
 
+.white {
+    color: #fff !important;
+}
+.red {
+    color: #e82728 !important;
+}
+
 /* line 269, ../sass/core/helpers.scss */
 .border-color {
   border-color: #01A9E1 !important;

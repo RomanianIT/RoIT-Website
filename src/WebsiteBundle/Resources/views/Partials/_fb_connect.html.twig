@@ -70,18 +70,15 @@
         var userFbId;
         var userPicture;
 
-        console.log('Welcome!  Fetching your information.... ');
         FB.api('/me?fields=first_name,last_name,picture,email', function(response) {
-            console.log(JSON.stringify(response));
             $('#member_firstname').val(response.first_name);
             $('#member_lastname').val(response.last_name);
             $('#member_email').val(response.email);
             userFbId = response.id;
         });
-        console.log(userFbId);
         FB.api(userFbId+"/picture", function (response) {
             if (response && !response.error) {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
             }
         });
     }

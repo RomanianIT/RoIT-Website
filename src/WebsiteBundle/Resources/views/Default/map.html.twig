@@ -17,9 +17,7 @@
 
     function updateLocation(id, lat, long) {
         $.post( "/update_location/"+id, { lat: lat, long: long }, function() {
-            console.log('location updated');
         }).fail(function() {
-            console.log('location update error');
         });
     };
 
@@ -111,8 +109,6 @@
                     newMap.theNext();
                 }
             } else {
-                // We're done
-                console.log('All positions places');
                 new MarkerClusterer(newMap.map, newMap.markers, newMap.clusterOptions);
             }
         };
@@ -128,10 +124,6 @@
 
                 //update the member coordinates so we don't need to use geocoding next time
                 updateLocation(memberId, lat, lng);
-
-                // Output the data
-                var msg = 'address="' + search + '" lat=' + lat + ' lng=' + lng + '(delay=' + $this.delay + 'ms)<br>';
-                console.log(msg);
                 // Create a marker
                 $this.createMarker('', lat, lng);
             }
@@ -141,10 +133,6 @@
                 if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
                     nextAddress--;
                     delay++;
-                } else {
-                    var reason = "Code " + status;
-                    var msg = 'address="' + search + '" error=' + reason + '(delay=' + $this.delay + 'ms)<br>';
-                    console.log(msg);
                 }
             }
             next();
