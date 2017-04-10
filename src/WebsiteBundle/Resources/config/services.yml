@@ -3,10 +3,10 @@ services:
 #        class: WebsiteBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
 
-    twig.extension.text:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - { name: twig.extension }
+#    twig.extension.text:
+#        class: Twig_Extensions_Extension_Text
+#        tags:
+#            - { name: twig.extension }
 
     file.type_extension:
         class: WebsiteBundle\TypeExtension\FileTypeExtension

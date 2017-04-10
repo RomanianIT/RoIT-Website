@@ -75,18 +75,24 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: false
     bundles:        [ WebsiteBundle ]
+    node: /usr/local/bin/node
     filters:
         cssrewrite: ~
-
-jms_translation:
-    configs:
-        app:
-            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
-            output_dir: %kernel.root_dir%/../src/WebsiteBundle/Resources/translations
-            ignored_domains: [routes]
-            excluded_names: ["*TestCase.php", "*Test.php"]
-            excluded_dirs: [cache, data, logs]
-            #extractors: [jms_i18n_routing]
+        uglifyjs2:
+        # the path to the uglifyjs executable
+            bin: /usr/local/bin/uglifyjs
+        uglifycss:
+            bin: /usr/local/bin/uglifycss
+#
+#jms_translation:
+#    configs:
+#        app:
+#            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+#            output_dir: %kernel.root_dir%/../src/WebsiteBundle/Resources/translations
+#            ignored_domains: [routes]
+#            excluded_names: ["*TestCase.php", "*Test.php"]
+#            excluded_dirs: [cache, data, logs]
+#            #extractors: [jms_i18n_routing]
 
 services:
     twig.text_extension:

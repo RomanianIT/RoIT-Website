@@ -20,12 +20,11 @@
 
     <!-- Stylesheets
     ============================================= -->
-    {#<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />#}
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway|Crete+Round" rel="stylesheet">
 
     {% stylesheets 'bundles/website/css/style.css'
                    'bundles/website/css/custom.css'
-            output='style' filter='cssrewrite' -%}
+            output='style' filter='uglifycss' filter='cssrewrite' -%}
     <link rel="stylesheet" type="text/css" media="screen, print" href="{{ asset_url }}" />
     {% endstylesheets -%}
 
@@ -46,11 +45,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://maps.google.fr/maps/api/js?language=ro&key=AIzaSyBZ3hzjzTCqiFED51f_lRENCd2LJ02Uo9I&libraries=places" type="text/javascript"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js"></script>
-
-    <!-- Document Title
+     <!-- Document Title
     ============================================= -->
     <title>Romanian IT | Comunitatea globala a romanilor din tech</title>
 
@@ -96,16 +91,11 @@
         '@WebsiteBundle/Resources/public/js/jquery.city-autocomplete.min.js'
         '@WebsiteBundle/Resources/public/js/jqBootstrapValidation.js'
         '@WebsiteBundle/Resources/public/js/contact.js'
+        filter='uglifyjs2'
          -%}
 
     <script src="{{ asset_url }}"></script>
     {% endjavascripts -%}
-
-<!--
-    <script type="text/javascript" src="js/functions.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
-    <script type="text/javascript" src="js/jquery.gmap.js"></script>
--->
 
     {% block footer_scripts %}
     {% endblock %}

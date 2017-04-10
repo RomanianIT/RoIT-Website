@@ -47,3 +47,73 @@
   max-width: 100%;
   max-height: 100px;
 }
+
+.fmm-header-image{
+  background-image: url('/bundles/website/images/bgs/xmas-bg.jpg');
+  padding: 120px 0;
+}
+
+/* Mentorship program */
+
+.mentorship-hero  {
+  text-align: center;
+}
+
+.mentorship-hero h1 {
+  font-size: 65px;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+
+.mentorship-hero h2{
+  text-shadow: 2px 2px rgba(232, 39, 40, .5);
+}
+
+.mentorship-hero h2 span {
+  font-size: 25px;
+  text-shadow: none;
+}
+
+.button.button-border.button-desc {
+  background-color: #000;
+  line-height: 1;
+  BORDER: 0;
+  color: #fff;
+}
+
+.lsrs {
+  text-align: center;
+}
+
+.lsrs h3 {
+  font-weight: normal;
+  font-style: italic;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 0;
+}
+
+.lsrs a {
+  transition: all .2s ease-in-out;
+  color: #e82728;
+}
+
+.lsrs a:hover {
+  color: #d22425;
+}
+
+.motiv-mentee {
+  /*    border: 1px solid #ddd;*/
+  padding: 20px 40px;
+
+}
+
+.motiv-mentee h3 span {
+  font-family: 'Crete Round',serif;
+  font-style: italic;
+  color: #e82728;
+}
+
+.mentorship-contact {
+  text-align: center;
+}

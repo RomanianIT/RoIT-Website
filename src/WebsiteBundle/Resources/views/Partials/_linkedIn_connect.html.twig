@@ -14,7 +14,6 @@
 
     // Handle the successful return from the API call
     function onSuccess(data) {
-        console.log(data);
         $('#member_firstname').val(data.firstName);
         $('#member_lastname').val(data.lastName);
         $('#member_position').val(data.headline);
@@ -22,7 +21,7 @@
 
     // Handle an error response from the API call
     function onError(error) {
-        console.log(error);
+        //console.log(error);
     }
 
     // Use the API call wrapper to request the member's basic profile data
@@ -31,6 +30,3 @@
     }
 
 </script>
-
-{#77eopmhi9eq3kj#}
-{#QKzOXGTUF8QRz5es#}

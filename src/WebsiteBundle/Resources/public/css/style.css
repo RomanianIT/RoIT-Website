@@ -9353,6 +9353,13 @@ span.middot {
   color: #01A9E1 !important;
 }
 
+.white {
+    color: #fff !important;
+}
+.red {
+    color: #e82728 !important;
+}
+
 /* line 269, ../sass/core/helpers.scss */
 .border-color {
   border-color: #01A9E1 !important;
@@ -18491,7 +18498,7 @@ body:not(.device-touch) .button.button-full strong {
   padding: 2px;
   z-index: -1;
   box-shadow: none;
-  background-image: url("images/icons/iconalt.svg");
+  /*background-image: url("images/icons/iconalt.svg");*/
   background-position: center center;
   background-size: 100% 100%;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s, background-color 0.5s;
@@ -18955,7 +18962,7 @@ body:not(.device-touch) .social-icon {
 
 /* line 81, ../sass/shortcodes/styled-icons.scss */
 .i-alt {
-  background-image: url("images/icons/iconalt.svg");
+  /*background-image: url("images/icons/iconalt.svg");*/
   background-position: center center;
   background-size: 100% 100%;
 }
